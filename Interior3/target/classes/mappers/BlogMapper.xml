@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ots.mapper.BlogMapper">
+
+
+	<select id="blogDetail" resultType="kr.co.ots.vo.BlogDetailVO">
+		select * from tb_blog where
+		blog_userid = #{blog_userid} order by write_time
+		desc;
+	</select>
+
+	<select id="myBlogDetail"
+		resultType="kr.co.ots.vo.myBlogDetailVO">
+		select * from tb_blog where bnum=#{bnum} order by
+		write_time desc;
+	</select>
+
+	<insert id="insertData">
+		insert into tb_blog(blog_img, style, title, contents,
+		blog_userid,
+		blog_userid_img)
+		values(#{blog_img}, #{style}, #{title},
+		#{contents}, #{blog_userid}, #{blog_userid_img});
+	</insert>
+
+	<update id="hit_cnt">
+		update tb_blog set hit_cnt = hit_cnt + 1 where bnum =
+		#{bnum};
+	</update>
+
+	<!-- blogMain 리스트 -->
+	<select id="mainBlogList"
+		resultType="kr.co.ots.vo.BlogMainListVO">
+		select bnum, blog_img, hit_cnt, score, blog_userid,
+		blog_userid_img,
+		max(write_time), style from tb_blog group by blog_userid;
+	</select>
+
+	<delete id="delete">
+		delete from tb_blog where bnum = #{bnum};
+	</delete>
+
+	<update id="modify">
+		update tb_blog set blog_img=#{blog_img},
+		style=#{style}, title=#{title},
+		contents=#{contents},
+		blog_userid=#{blog_userid} where bnum = #{bnum};
+	</update>
+
+	<insert id="reviewWrite">
+		insert into tb_review(bnum, contents, blog_userid,
+		writed_bnum,
+		reviewer_img, review_userid) values(#{bnum}, #{contents},
+		#{blog_userid}, #{writed_bnum}, #{reviewer_img}, #{review_userid});
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+    <delete id="reviewDelete">
+        delete from tb_review where bnum = #{bnum};
+    </delete>
+	
+
+	<!-- review 리스트 -->
+	<select id="reviewList" resultType="kr.co.ots.vo.ReviewListVO">
+		select * from tb_review where writed_bnum=#{bnum} order by write_time desc;
+	</select>
+
+	<insert id="scoreData">
+		insert into tb_score(userid, sex, age, blog_userid,
+		blog_bnum)
+		values(#{userid}, #{sex}, #{age}, #{blog_userid},
+		#{blog_bnum})
+	</insert>
+
+	<!-- 좋아요 카운트 증가 -->
+	<update id="incScore">
+		update tb_blog set score = score + 1 where bnum =
+		#{bnum};
+	</update>
+
+	<!-- 좋아요 카운트 감소 -->
+	<update id="decScore">
+		update tb_blog set score = score - 1 where bnum =
+		#{bnum}
+	</update>
+
+	<!-- score테이블 데이터 삭제 -->
+	<delete id="scoreDataDel">
+		delete from tb_score where bnum=#{bnum} <!-- score 테이블 넘버 -->
+	</delete>
+
+	<select id="scoreSelect" resultType="kr.co.ots.vo.ScoreDataVO"
+		parameterType="kr.co.ots.dto.TwoDTO">
+		select * from tb_score where userid=#{userid} and
+		blog_bnum=#{blog_bnum};
+	</select>
+
+	<!-- 블로그 메인 리스트 상위 4개만 -->
+	<select id="bloglank" resultType="kr.co.ots.vo.BlogRankVO">
+		select * from tb_blog order by
+		score desc limit 4;
+	</select>
+
+	<!-- 데이터 성별차트 시각화 -->
+	<select id="genderChart" resultType="kr.co.ots.vo.genderChartVO">
+		select sex, count(sex) as
+		count from tb_score where blog_bnum=#{blog_bnum}
+		group by sex;
+	</select>
+
+	<select id="agesChart" resultType="kr.co.ots.vo.agesChartVO">
+
+		select a.ages as ages, count(a.ages) as count
+		from
+		(select case 
+         <![CDATA[
+            when age<20 then '10'
+            ]]>
+		when age between 20 and 29 then '20'
+		when age between 30 and 39 then
+		'30'
+		when age between 40 and 49 then '40'
+            <![CDATA[  
+               when age>50 then '50'
+               ]]>
+		end as ages
+		from tb_score where blog_bnum=#{blog_bnum}) a
+		group by ages;
+
+	</select>
+	
+	<!-- 내가 올린 글과 같은 취향의 블로그 -->
+    <select id="taste" resultType="kr.co.ots.vo.BlogDetailVO">
+       select * from tb_blog where style=#{style} and blog_userid != #{blog_userid};
+    </select>
+
+
+</mapper>   

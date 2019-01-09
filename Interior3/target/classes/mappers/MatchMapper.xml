@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="kr.co.ots.mapper.MatchMapper">
+
+<select id="imgList" resultType="kr.co.ots.vo.ImgListVO">
+		select * from tb_interior order by inum desc limit 100;
+</select>
+
+<select id="colorList"  resultType="kr.co.ots.vo.ColorListVO">
+		<!--  select bnum, blog_img, color_score from tb_blog where color_score=#{color_score}-->
+		select * from tb_interior where color_score = #{color_score} order by inum desc;
+</select>
+
+
+<insert id="furnitureInfo"> <!--  parameterType=""> -->
+		insert into tb_furniture(furniture_img, color_score) values (#{furniture_img},#{color_score});
+		
+</insert>
+</mapper>
+
+

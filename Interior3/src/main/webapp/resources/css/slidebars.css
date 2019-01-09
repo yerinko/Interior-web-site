@@ -1,0 +1,47 @@
+[off-canvas] {
+	display: none;
+	position: fixed;
+	overflow: hidden;
+	overflow-y: auto;
+	background-color: papayawhip; /* Basic background color, overwrite this in your own css. */
+	color: black; /* Basic colors, overwrite this in your own css. */
+	-webkit-overflow-scrolling: touch; /* Enables momentum scrolling on iOS devices, may be removed by setting to 'auto' in your own CSS. */
+}
+
+[off-canvas*=right] {
+	width: 300px;
+	height: 100%;
+	top: 0;
+	right: 0;
+}
+
+[off-canvas*=shift][off-canvas*=left] {
+	-webkit-transform: translate( 50%, 0px );
+	        transform: translate( 50%, 0px );
+}
+
+[canvas], [off-canvas] {
+	-webkit-transform: translate( 0px, 0px );
+	    -ms-transform: translate( 0px, 0px );
+	        transform: translate( 0px, 0px );
+	-webkit-transition: -webkit-transform 300ms;
+	        transition:         transform 300ms;
+	-webkit-backface-visibility: hidden; /* Prevents flickering, may be removed if experiencing problems with fixed background images in Chrome. */
+}
+
+
+[off-canvas*=reveal] {
+	z-index: 0;
+}
+
+[off-canvas*=push] {
+	z-index: 1;
+}
+
+[off-canvas*=overlay] {
+	z-index: 9999;
+}
+
+[off-canvas*=shift] {
+	z-index: 0;
+}

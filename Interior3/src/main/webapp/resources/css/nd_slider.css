@@ -1,0 +1,208 @@
+body{
+	color: #333;
+	font-family: 'Oswald', Arial, sans-serif;
+	font-size: 13px;
+}
+
+a {
+	text-decoration:none;
+	-webkit-transition:all ease-in 0.2s;
+	-moz-transition:all ease-in 0.2s;
+	-ms-transition:all ease-in 0.2s;
+	-o-transition:all ease-in 0.2s;
+	transition:all ease-in 0.2s;
+}
+h2 a:link {
+	color:#333;
+	text-decoration:none;
+}
+h2 a:visited {
+	color:#333;
+	text-decoration:none;
+}
+h2 a:hover {
+	color:#44a0c0;
+	text-decoration:none;
+	border-bottom:1px solid #f66;
+}
+h1{
+	margin:20px 0 0 0;
+	padding:20px 20px 10px 20px;
+	font-size:34px;
+	color:#333;
+    text-shadow:1px 1px 1px #fff;
+	text-align:left;
+	font-weight:400;
+    text-align:center;
+}
+h2 {
+	font-family: 'Droid Serif', serif;
+	font-weight: normal;
+	font-size:21px;
+	margin:0 auto;
+	text-align:center;
+}
+
+
+/* Header Style */
+.more{
+	position:relative;
+	clear:both;
+	font-family:'Arial Narrow', Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 11px;
+    padding: 5px 0px 10px;
+    width: 300px;
+    margin: 0 auto;
+}
+.more ul{
+	display:block;
+	text-align:center;
+    height: 30px;
+}
+.more ul li{
+	display: block;
+    padding: 4px 2px;
+    float:left;
+}
+.more ul li.selected a,
+.more ul li.selected a:hover{
+	background:#09c;
+	color:#fff;
+	text-shadow:none;
+}
+.more ul li a{
+	color:#555;
+    float:left;
+	background:#fff;
+    width:60px;
+	padding: 2px 5px;
+	-moz-box-shadow:1px 1px 2px #aaa;
+	-webkit-box-shadow:1px 1px 2px #aaa;
+	box-shadow:1px 1px 2px #aaa;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.more ul li a:hover{
+	background:#333;
+	color:#fff;
+}
+
+
+/* main */
+.clear {
+	overflow: hidden;
+	width: 100%;
+}
+.fl {
+	float: left;
+	display: inline;
+}
+.dn {
+	display: none;
+}
+
+.wrap_box {
+	position: relative; 
+	margin: 50px 0 0;
+	z-index: 2000;
+}
+.wrap_box .visual {
+	height: 420px;
+	margin-top: 0px;
+}
+.wrap_box .box {
+	width: 1200px;
+	margin: 4px auto 0;
+	position: relative;
+}
+.wrap_box .visual .pht {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 700px;
+	height: 415px;
+}
+.wrap_box .visual .control {
+	position: absolute;
+	top: 369px;
+	left: 375px;
+	width: 150px;
+}
+.wrap_box .visual .control .fl {
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+.wrap_box .visual .thumbox{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 279px;
+	height: 420px;
+}
+.wrap_box .visual .listbox { 
+	margin: 0 auto; 
+	top: 0px; 
+	padding: 0 0 0 4px;
+	width: 275px; 
+	list-style:none; 
+}
+.wrap_box .visual .listbox .ll {
+	margin: 0 0 0 0;
+	cursor: pointer;
+	height: 83px;
+}
+.wrap_box .visual .listbox .ll img {
+	display: block;
+}
+.wrap_box .visual .listbox2 {
+	position: absolute;
+	margin: 0 auto;
+	top: 0px;
+	left: 0;
+	list-style: none;
+}
+.wrap_box .visual .listbox2 li {
+	position: absolute;
+	display: none;
+}
+.wrap_box .visual .listbox2 li.li_o1 {
+	top: 0px;
+	left: 4px;
+	display: block;
+}
+.wrap_box .visual .listbox2 li.li_o2 {
+	top: 83px;
+	left: 4px;
+}
+.wrap_box .visual .listbox2 li.li_o3 {
+	top: 166px;
+	left: 4px;
+}
+.wrap_box .visual .listbox2 li.li_o4 {
+	top: 249px;
+	left: 4px;
+}
+.wrap_box .visual .listbox2 li.li_o5 {
+	top: 332px;
+	left: 4px;
+}
+.wrap_box .visual .listbox2 li.li_o6 {
+	top: 415px;
+	left: 4px;
+}
+
+.wrap_box .visual .prev {
+	position: absolute;
+	top: 197px;
+	left: 19px;
+	cursor: pointer;
+}
+.wrap_box .visual .next {
+	position: absolute;
+	top: 197px;
+	right: 298px;
+	cursor: pointer;
+}

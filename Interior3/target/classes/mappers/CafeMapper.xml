@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org./dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ots.mapper.CafeMapper">
+
+<select id="cafename" resultType="kr.co.ots.vo.CafeNameVO">
+	select cafe_name, cafe_url, bnum, cafe_hit_cnt, cafe_score, cafe_good, main_image
+	from tb_cafe_list
+</select>
+
+<select id="cafelist" resultType="kr.co.ots.vo.CafeListVO">
+	select d.dnum, d.title, d.hit_cnt, d.score, d.good, d.url, d.category, d.title_image, d.cafe_name
+	from tb_cafe_list b, tb_cafe_detail d
+	where b.cafe_name = d.cafe_name
+</select>
+
+<select id="scoremain" parameterType="kr.co.ots.dto.CafeListDTO">
+	update tb_cafe_list set cafe_good = cafe_good+1
+	where bnum=#{bnum}
+</select>
+
+<select id="scorecafe" parameterType="kr.co.ots.dto.CafeListDTO">
+	update tb_cafe_detail set good = good+1
+	where dnum=#{dnum}
+</select>
+
+<select id="hitmain" parameterType="kr.co.ots.dto.CafeListDTO">
+	update tb_cafe_list set cafe_hit_cnt = cafe_hit_cnt+1
+	where bnum=#{bnum}
+</select>
+
+<select id="hitcafe" parameterType="kr.co.ots.dto.CafeListDTO">
+	update tb_cafe_detail set hit_cnt = hit_cnt+1
+	where dnum=#{dnum}
+</select>
+
+<select id="detailcafe" resultType="kr.co.ots.vo.CafeDetailVO">
+	select dnum, cafe_name, title, hit_cnt, score, good, url, category
+	from tb_cafe_detail
+	where dnum = #{dnum}
+</select>
+
+<select id="cafecomment" resultType="kr.co.ots.vo.CafeCommentVO">
+	select cnum, image, userid, contents, score, write_time
+	from tb_cafe_comment
+	where dnum = #{dnum}
+	ORDER BY write_time desc
+</select>
+
+<select id="cafeimage" resultType="kr.co.ots.vo.CafeImageVO">
+	select cafe_image
+	from tb_cafe_image
+	where dnum = #{dnum}
+</select>
+
+<insert id="insertcomment" parameterType="kr.co.ots.dto.CafeCommentDTO">
+	insert into tb_cafe_comment(dnum, userid, image, contents, score)
+	values (#{dnum}, #{userid} ,#{image}, #{contents}, #{score})
+</insert>
+
+<delete id="deletecomment" parameterType="kr.co.ots.dao.CafeListDAO">
+		delete 
+		from tb_cafe_comment 
+		where cnum= #{cnum}
+</delete>
+</mapper>
